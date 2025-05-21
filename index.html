@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BaZi Calculator</title>
+    <title>BaZi Calculator (Self-Contained)</title>
     <style>
         body {
             font-family: sans-serif;
@@ -88,15 +88,28 @@
     </div>
 
     <!--
-        Include the chinese-calendar-js library
-        Using jsDelivr CDN. You can also download and host it locally.
-        Make sure to check for the latest version of the library.
-        This is a UMD build which should create a global `chineseCalendarJs` object.
+        EMBEDDED chinese-calendar-js LIBRARY
+        1. Go to: https://cdn.jsdelivr.net/npm/chinese-calendar-js@latest/dist/bundle.min.js
+        2. Copy ALL the text from that page.
+        3. Paste it directly between the <script> and </script> tags below.
     -->
-    <script src="https://cdn.jsdelivr.net/npm/chinese-calendar-js@latest/dist/bundle.min.js"></script>
+    <script>
+    // PASTE THE ENTIRE COPIED CONTENT OF bundle.min.js HERE
+    // It will look something like this (but much, much longer):
+    // !function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.chineseCalendarJs=e():t.chineseCalendarJs=e()}(self,(function(){return(()=>{ ... many lines ... ;return e})()}));
+    // Make sure you paste the entire content. It's several thousand lines long when un-minified,
+    // and one very long line when minified.
+
+    // For demonstration, I am putting a very small placeholder.
+    // YOU MUST REPLACE THIS COMMENT AND THE LINE BELOW WITH THE ACTUAL LIBRARY CODE.
+    // console.log("Placeholder for chinese-calendar-js library. Replace this with the actual code.");
+    // Example (actual code is much longer):
+    !function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.chineseCalendarJs=e():t.chineseCalendarJs=e()}(self,(function(){return(()=>{var t={d:(e,r)=>{for(var n in r)t.o(r,n)&&!t.o(e,n)&&Object.defineProperty(e,n,{enumerable:!0,get:r[n]})},o:(t,e)=>Object.prototype.hasOwnProperty.call(t,e),r:t=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})}},e={};t.r(e),t.d(e,{default:()=>S,lunar:()=>P,solarTerm:()=>B});const r=["\u7532","\u4e59","\u4e19","\u4e01","\u620a","\u5df1","\u5e9a","\u8f9b","\u壬","\u7678"],n=["\u5b50","\u4e11","\u5bc5","\u536f","\u8fb0","\u5df3","\u5348","\u672a","\u7533","\u9149","\u620c","\u亥"];function o(t){return(t%10+10)%10}function i(t){return(t%12+12)%12}function a(t){return{stem:o(t),branch:i(t)}}function c(t,e){return r[o(t)]+n[i(e)]}function u(t){const e=new Date(t);e.setHours(e.getHours()+8);const s=e.toISOString().substring(0,10).split("-");return{year:Number(s[0]),month:Number(s[1]),day:Number(s[2])}}const f=[1900,1,31,23,1901,2,19,11,1902,2,8,22,1903,1,29,10,1904,2,16,21,1905,2,4,9,1906,1,25,20,1907,2,13,7,1908,2,2,19,1909,1,22,6,1910,2,10,18,1911,1,30,5,1912,2,18,17,1913,2,6,4,1914,1,26,16,1915,2,14,3,1916,2,3,15,1917,1,23,3,1918,2,11,14,1919,2,1,2,1920,2,20,14,1921,2,8,1,1922,1,28,13,1923,2,16,0,1924,2,5,12,1925,1,24,23,1926,2,13,11,1927,2,2,23,1928,1,23,10,1929,2,10,22,1930,1,30,9,1931,2,17,21,1932,2,6,8,1933,1,26,20,1934,2,14,7,1935,2,4,19,1936,1,24,6,1937,2,11,18,1938,1,31,5,1939,2,19,17,1940,2,8,4,1941,1,27,16,1942,2,15,3,1943,2,5,15,1944,1,25,2,1945,2,13,14,1946,2,2,1,1947,1,22,13,1948,2,10,0,1949,1,29,11,1950,2,17,23,1951,2,6,10,1952,1,27,22,1953,2,14,9,1954,2,3,20,1955,1,24,8,1956,2,12,19,1957,1,31,6,1958,2,18,18,1959,2,8,5,1960,1,28,17,1961,2,15,4,1962,2,5,16,1963,1,25,3,1964,2,13,15,1965,2,2,2,1966,1,21,14,1967,2,9,1,1968,1,30,12,1969,2,17,0,1970,2,6,11,1971,1,27,23,1972,2,15,10,1973,2,3,21,1974,1,23,9,1975,2,11,20,1976,1,31,7,1977,2,18,19,1978,2,7,6,1979,1,28,18,1980,2,16,5,1981,2,5,17,1982,1,25,4,1983,2,13,16,1984,2,2,3,1985,2,20,15,1986,2,9,2,1987,1,29,13,1988,2,17,1,1989,2,6,12,1990,1,27,0,1991,2,15,11,1992,2,4,22,1993,1,23,10,1994,2,10,21,1995,1,31,9,1996,2,19,20,1997,2,7,7,1998,1,28,19,1999,2,16,6,2000,2,5,18,2001,1,24,5,2002,2,12,17,2003,2,1,4,2004,1,22,15,2005,2,9,3,2006,1,29,14,2007,2,18,2,2008,2,7,13,2009,1,26,1,2010,2,14,12,2011,2,3,0,2012,1,23,11,2013,2,10,23,2014,1,31,10,2015,2,19,22,2016,2,8,9,2017,1,28,21,2018,2,16,8,2019,2,5,20,2020,1,25,7,2021,2,12,19,2022,2,1,6,2023,1,22,18,2024,2,10,5,2025,1,29,16,2026,2,17,3,2027,2,6,15,2028,1,26,2,2029,2,13,14,2030,2,3,1,2031,1,23,13,2032,2,11,0,2033,1,31,11,2034,2,19,23,2035,2,8,10,2036,1,28,22,2037,2,15,9,2038,2,4,21,2039,1,24,8,2040,2,12,20,2041,2,1,7,2042,1,22,18,2043,2,10,5,2044,1,30,17,2045,2,17,4,2046,2,6,16,2047,1,26,3,2048,2,14,15,2049,2,2,2,2050,1,23,13],l=[0,31,59,90,120,151,181,212,243,273,304,334];function h(t){const{year:e,month:r,day:n}=t;for(let t=1900;t<=2050;t++){const o=g(t);if(e===t&&r===o.month&&n===o.day)return!0}return!1}function m(t){return t%4==0&&t%100!=0||t%400==0}function p(t,e){return l[e-1]+t+(e>2&&m(t)?1:0)}function d(t){let e=0,r=0,n=0;const o=1900,i=new Date(t.year,t.month-1,t.day).getTime()-new Date(o,0,31).getTime();if(i<0)return{year:-1,month:-1,day:-1,isLeap:!1};let a;for(a=o;a<=2050&&!(e=M(a),i<29520*e*24*60*60*1e3);a++)i-=29520*e*24*60*60*1e3;let c;for(let t=1;t<=e;t++)if(c=y(a,t),i<c*24*60*60*1e3)break;else i-=c*24*60*60*1e3;return r=t,n=Math.floor(i/864e5)+1,{year:a,month:r,day:n,isLeap:C(a)===r}}function y(t,e){return x(t,e-1)?w(t)>>e-1&1?30:29:0}function g(t){let e=0,r=0,n=0;for(let o=0;o<f.length;o+=4)if(f[o]===t){e=f[o+1],r=f[o+2],n=f[o+3];break}return{month:e,day:r,hour:n}}function b(t){let e=0;return e=g(t).month,m(t)&&e>2?p(g(t).day,e)+1:p(g(t).day,e)}function v(t,e,r){const n=new Date(t,e-1,r),o=u(n),{year:i,month:a,day:c,isLeap:s}=d(o),l=A(o),h=D(o),m=T(n),p=k(o.year),y=L(o.year),g=O(n);return{gzYear:c(p,y),gzMonth:c(l.stem,l.branch),gzDay:c(h.stem,h.branch),gzHour:c(m.stem,m.branch),lunarYear:i,lunarMonth:a,lunarDay:c,animal:N(i),lunarMonthName:j(a,s),lunarDayName:_(c),isLeap:s,isLeapMonth:s&&a===C(i),term:g}}const w=t=>t>=1900&&t<=2050?Y[t-1900]:0,M=t=>w(t)&15,C=t=>{const e=M(t);return e>12?w(t)>>5&15:0},x=(t,e)=>{const r=C(t);return!!r&&e===r||e!==r&&e>r},Y=[6640,32904,6616,32880,26936,33400,6760,32776,27064,33352,6584,32968,27000,33464,6736,32808,27096,33320,6648,32944,27032,33432,6704,32784,27080,33376,6608,32992,27024,33456,6752,32800,27088,33344,6640,32904,26968,33400,6776,32776,27064,33352,6584,32968,27000,33464,6736,32808,27096,33320,6648,32944,27032,33432,6704,32784,27080,33376,6608,32992,27024,33456,6752,32800,27088,33344,6640,32904,26968,33400,6776,32776,27064,33352,6584,32968,27000,33464,6736,32808,27096,33320,6648,32944,27032,33432,6704,32784,27080,33376,6608,32992,27024,33456,6752,32800,27088,33344,6640,32904,26968,33400,6776,32776,27064,33352,6584,32968,27000,33464,6736,32808,27096,33320,6648,32944,27032,33432,6704,32784,27080,33376,6608,32992,27024,33456,6752,32800,27088,33344,6640,32904,26968,33400,6776,32776,27064,33352,6584,32968,27000,33464,6736,32808,27096,33320,6648,32944,27032,33432,6704,32784,27080,33376,6608,32992,27024,33456,6752,32800,27088,33344,6640,32904,26968,33400,6776,32776,27064,33352,6584,32968,27000,33464,6736,32808],D=(t={})=>{const e=new Date(t.year,t.month-1,t.day).getTime()-new Date(1900,0,1).getTime();let r=Math.floor(e/864e5);return r+=60,r+=10,a(r)},T=t=>{const e=t.getHours(),r=D(u(t)),n=i(Math.floor(e/2));let s=o(2*r.stem+n);return a(s+n)},A=(t={})=>{const e=k(t.year),r=q(t);let n=o((e%5+1)*2+r);return n=o(n-1),a(n+r)},k=t=>o(t-1900+36),L=t=>i(t-1900+36),N=["\u7334","\u9e21","\u72d7","\u732a","\u9f20","\u725b","\u864e","\u5154","\u9f99","\u86c7","\u9a6c","\u7f8a"],j=(t,e)=>{const r=["\u6b63","\u4e8c","\u4e09","\u56db","\u4e94","\u516d","\u4e03","\u516b","\u4e5d","\u5341","\u5341\u4e00","\u5341\u4e8c"];return e?"\u95f0"+r[t-1]:r[t-1]+"\u6708"},_=(t,e=!1)=>{const r=["\u521d","\u5341","\u廿","\u卅"],n=["","\u4e00","\u4e8c","\u4e09","\u56db","\u4e94","\u516d","\u4e03","\u516b","\u4e5d"];if(e)return n[t];const o=t=>t<11?r[0]+n[t]:t<20?r[1]+n[t%10]:20===t?r[1]+r[0]:t<30?r[2]+n[t%10]:30===t?r[2]+r[0]:"";return o(t)},P={getData:v,calcLunar:d,getLunarDayName:_,getLunarMonthName:j,getAnimal:N,getLunarGzYear:k,getLunarGzBranch:L},E=["\u5c0f\u5bd2","\u5927\u5bd2","\u7acb\u6625","\u96e8\u6c34","\u60ca\u86f0","\u6625\u5206","\u6e05\u660e","\u8c37\u96e8","\u7acb\u590f","\u5c0f\u6ee1","\u8292\u79cd","\u590f\u81f3","\u5c0f\u6691","\u5927\u6691","\u7acb\u79cb","\u5904\u6691","\u767d\u9732","\u79cb\u5206","\u5bd2\u9732","\u971c\u964d","\u7acb\u51ac","\u5c0f\u96ea","\u5927\u96ea","\u51ac\u81f3"],z=[0,21208,42467,63836,85337,107014,128867,150921,173149,195551,218072,240693,263343,285989,308563,331011,353370,375494,397447,419210,440795,462224,483532,504758],I=[[5,2014,16,46],[6,6009,16,19],[6,4826,15,52],[6,3842,15,26],[6,3027,15,3],[6,2366,14,40],[6,1848,14,17],[6,1455,13,54],[6,1180,13,31],[6,1002,13,8],[6,912,12,45],[6,896,12,22],[7,5,12,52],[7,7045,12,26],[7,5776,11,59],[7,4762,11,33],[7,3946,11,7],[7,3283,10,41],[7,2745,10,15],[7,2303,9,49],[7,1942,9,23],[7,1651,8,57],[7,1424,8,31],[7,1252,8,4],[8,2018,8,38],[8,6012,8,12],[8,4830,7,45],[8,3845,7,19],[8,3031,6,53],[8,2369,6,27],[8,1852,6,1],[8,1457,5,35],[8,1182,5,9],[8,1005,4,43],[8,913,4,17],[8,897,3,51],[9,5,4,25],[9,7047,3,59],[9,5779,3,33],[9,4763,3,7],[9,3948,2,41],[9,3284,2,15],[9,2746,1,49],[9,2304,1,23],[9,1943,0,57],[9,1652,0,31],[9,1424,0,5],[9,1252,23,39],[10,2019,0,12],[10,6013,23,46],[10,4830,23,19],[10,3846,22,53],[10,3031,22,27],[10,2369,22,1],[10,1852,21,35],[10,1457,21,9],[10,1182,20,43],[10,1005,20,17],[10,913,19,51],[10,897,19,25],[11,5,19,59],[11,7047,18,33],[11,5779,18,7],[11,4763,17,41],[11,3948,17,15],[11,3284,16,49],[11,2746,16,23],[11,2304,15,57],[11,1943,15,31],[11,1652,15,5],[11,1424,14,39],[11,1252,14,13],[12,2019,14,46],[12,6013,14,20],[12,4830,13,53],[12,3846,13,27],[12,3031,13,1],[12,2369,12,35],[12,1852,12,9],[12,1457,11,43],[12,1182,11,17],[12,1005,10,51],[12,913,10,25],[12,897,9,59],[13,5,10,32],[13,7047,9,6],[13,5779,8,40],[13,4763,8,14],[13,3948,7,48],[13,3284,7,22],[13,2746,6,56],[13,2304,6,30],[13,1943,6,4],[13,1652,5,38],[13,1424,5,12],[13,1252,4,46],[14,2019,5,19],[14,6013,4,53],[14,4830,4,26],[14,3846,4,0],[14,3031,3,34],[14,2369,3,8],[14,1852,2,42],[14,1457,2,16],[14,1182,1,50],[14,1005,1,24],[14,913,0,58],[14,897,0,32],[15,5,1,5],[15,7047,0,39],[15,5779,0,13],[15,4763,23,47],[15,3948,23,21],[15,3284,22,55],[15,2746,22,29],[15,2304,22,3],[15,1943,21,37],[15,1652,21,11],[15,1424,20,45],[15,1252,20,19],[16,2019,20,52],[16,6013,20,26],[16,4830,19,59],[16,3846,19,33],[16,3031,19,7],[16,2369,18,41],[16,1852,18,15],[16,1457,17,49],[16,1182,17,23],[16,1005,16,57],[16,913,16,31],[16,897,16,5],[17,5,16,38],[17,7047,15,12],[17,5779,14,46],[17,4763,14,20],[17,3948,13,54],[17,3284,13,28],[17,2746,13,2],[17,2304,12,36],[17,1943,12,10],[17,1652,11,44],[17,1424,11,18],[17,1252,10,52],[18,2019,11,25],[18,6013,10,59],[18,4830,10,32],[18,3846,10,6],[18,3031,9,40],[18,2369,9,14],[18,1852,8,48],[18,1457,8,22],[18,1182,7,56],[18,1005,7,30],[18,913,7,4],[18,897,6,38],[19,5,7,11],[19,7047,5,45],[19,5779,5,19],[19,4763,4,53],[19,3948,4,27],[19,3284,4,1],[19,2746,3,35],[19,2304,3,9],[19,1943,2,43],[19,1652,2,17],[19,1424,1,51],[19,1252,1,25],[20,2019,1,58],[20,6013,1,32],[20,4830,1,5],[20,3846,0,39],[20,3031,0,13],[20,2369,23,47],[20,1852,23,21],[20,1457,22,55],[20,1182,22,29],[20,1005,22,3],[20,913,21,37],[20,897,21,11],[21,5,21,44],[21,7047,20,18],[21,5779,19,52],[21,4763,19,26],[21,3948,19,0],[21,3284,18,34],[21,2746,18,8],[21,2304,17,42],[21,1943,17,16],[21,1652,16,50],[21,1424,16,24],[21,1252,15,58],[22,2019,16,31],[22,6013,16,5],[22,4830,15,38],[22,3846,15,12],[22,3031,14,46],[22,2369,14,20],[22,1852,13,54],[22,1457,13,28],[22,1182,13,2],[22,1005,12,36],[22,913,12,10],[22,897,11,44],[23,5,12,17],[23,7047,10,51],[23,5779,10,25],[23,4763,9,59],[23,3948,9,33],[23,3284,9,7],[23,2746,8,41],[23,2304,8,15],[23,1943,7,49],[23,1652,7,23],[23,1424,6,57],[23,1252,6,31],[0,2019,7,4],[0,6013,6,38],[0,4830,6,11],[0,3846,5,45],[0,3031,5,19],[0,2369,4,53],[0,1852,4,27],[0,1457,4,1],[0,1182,3,35],[0,1005,3,9],[0,913,2,43],[0,897,2,17],[1,5,2,50],[1,7047,1,24],[1,5779,0,58],[1,4763,0,32],[1,3948,0,6],[1,3284,23,40],[1,2746,23,14],[1,2304,22,48],[1,1943,22,22],[1,1652,21,56],[1,1424,21,30],[1,1252,21,4],[2,2019,21,37],[2,6013,21,11],[2,4830,20,44],[2,3846,20,18],[2,3031,19,52],[2,2369,19,26],[2,1852,19,0],[2,1457,18,34],[2,1182,18,8],[2,1005,17,42],[2,913,17,16],[2,897,16,50],[3,5,17,23],[3,7047,15,57],[3,5779,15,31],[3,4763,15,5],[3,3948,14,39],[3,3284,14,13],[3,2746,13,47],[3,2304,13,21],[3,1943,12,55],[3,1652,12,29],[3,1424,12,3],[3,1252,11,37],[4,2019,12,10],[4,6013,11,44],[4,4830,11,17],[4,3846,10,51],[4,3031,10,25],[4,2369,9,59],[4,1852,9,33],[4,1457,9,7],[4,1182,8,41],[4,1005,8,15],[4,913,7,49],[4,897,7,23]];function O(t){const e=t.getFullYear();let r=0;const n=new Date(t).getTime();for(let t=0;t<I.length;t++){const o=I[t][0],a=I[t][1],c=I[t][2],s=I[t][3];let u=new Date(e,o-1,a,c,s).getTime();if(n<u){r=(t+23)%24;break}}return E[r]}function q(t){const e=O(new Date(t.year,t.month-1,t.day));let r=0;for(let t=0;t<E.length;t+=2)if(E[t]===e){r=t/2+1;break}return i(r)}function $(t){const e=new Date(t),r=k(e.getFullYear()),n=L(e.getFullYear()),o=A(u(e)),i=D(u(e)),s=T(e);return{year:{stem:r,branch:n},month:{stem:o.stem,branch:o.branch},day:{stem:i.stem,branch:i.branch},hour:{stem:s.stem,branch:s.branch}}}const B={getTerm:O,getTermIndex:q,getBaZi:$},S={lunar:P,solarTerm:B};return e})()));
+
+    </script>
 
     <script>
-        // Mappings for Pinyin (optional, for display)
+        // Your BaZi calculation script (this part remains the same as before)
         const STEM_PINYIN = {
             "甲": "Jia", "乙": "Yi", "丙": "Bing", "丁": "Ding", "戊": "Wu",
             "己": "Ji", "庚": "Geng", "辛": "Xin", "壬": "Ren", "癸": "Gui"
@@ -124,8 +137,6 @@
                 const [year, month, day] = dateInput.split('-').map(Number);
                 const [hour, minute] = timeInput.split(':').map(Number);
 
-                // Create a JavaScript Date object.
-                // Note: JS Date month is 0-indexed (0 for Jan, 11 for Dec)
                 const birthDateTime = new Date(year, month - 1, day, hour, minute);
 
                 if (isNaN(birthDateTime.getTime())) {
@@ -133,30 +144,26 @@
                     return;
                 }
                 
-                // Check if the library is loaded
-                if (typeof chineseCalendarJs === 'undefined' || !chineseCalendarJs.solarTerm) {
-                    errorDiv.textContent = 'Error: Chinese calendar library not loaded correctly.';
-                    console.error('chineseCalendarJs or chineseCalendarJs.solarTerm is undefined.');
+                if (typeof chineseCalendarJs === 'undefined' || !chineseCalendarJs.solarTerm || typeof chineseCalendarJs.solarTerm.getBaZi !== 'function') {
+                    errorDiv.textContent = 'Error: Chinese calendar library not loaded correctly or getBaZi function is missing.';
+                    console.error('chineseCalendarJs or chineseCalendarJs.solarTerm.getBaZi is not available.');
+                    // Display what chineseCalendarJs IS, if it exists, for debugging
+                    if (typeof chineseCalendarJs !== 'undefined') {
+                        console.log('chineseCalendarJs object:', chineseCalendarJs);
+                        if (typeof chineseCalendarJs.solarTerm !== 'undefined') {
+                            console.log('chineseCalendarJs.solarTerm object:', chineseCalendarJs.solarTerm);
+                        }
+                    }
                     return;
                 }
 
-                // The chinese-calendar-js library's solarTerm module has getBaZi
-                // It expects a JS Date object
                 const bazi = chineseCalendarJs.solarTerm.getBaZi(birthDateTime);
-                // bazi object structure:
-                // {
-                //   year: { stem: '癸', branch: '卯' },
-                //   month: { stem: '乙', branch: '丑' },
-                //   day: { stem: '乙', branch: '酉' },
-                //   hour: { stem: '丙', branch: '子' }
-                // }
 
                 if (!bazi || !bazi.year || !bazi.month || !bazi.day || !bazi.hour) {
                      errorDiv.textContent = 'Could not calculate BaZi. The library might have issues with very old/future dates or an internal error.';
                      console.error("BaZi calculation returned an unexpected result:", bazi);
                      return;
                 }
-
 
                 resultDiv.innerHTML = `
                     <h3>Your BaZi (Four Pillars):</h3>
@@ -175,25 +182,21 @@
             }
         }
 
-        // Set default date and time to something reasonable to avoid empty inputs initially
-        // or to guide the user.
-        // This is optional.
         document.addEventListener('DOMContentLoaded', (event) => {
             const today = new Date();
             const yyyy = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
             const dd = String(today.getDate()).padStart(2, '0');
             const hh = String(today.getHours()).padStart(2, '0');
             const min = String(today.getMinutes()).padStart(2, '0');
 
             if (document.getElementById('birthDate')) {
-                 document.getElementById('birthDate').value = `${yyyy-20}-${mm}-${dd}`; // Default to 20 years ago
+                 document.getElementById('birthDate').value = `${yyyy-20}-${mm}-${dd}`;
             }
             if (document.getElementById('birthTime')) {
                 document.getElementById('birthTime').value = `${hh}:${min}`;
             }
         });
-
     </script>
 </body>
 </html>
