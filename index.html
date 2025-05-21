@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaZi Calculator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="date"], input[type="time"], button {
+            width: calc(100% - 22px); /* Adjust for padding/border */
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+        }
+        #result p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+        .pillar-label {
+            font-weight: bold;
+            color: #555;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>BaZi (Four Pillars) Converter</h1>
+
+        <label for="birthDate">Birth Date:</label>
+        <input type="date" id="birthDate">
+
+        <label for="birthTime">Birth Time:</label>
+        <input type="time" id="birthTime">
+
+        <button onclick="calculateBazi()">Calculate BaZi</button>
+
+        <div id="result">
+            <p>Please enter your birth date and time.</p>
+        </div>
+        <div id="error-message" class="error"></div>
+    </div>
+
+    <!--
+        Include the chinese-calendar-js library
+        Using jsDelivr CDN. You can also download and host it locally.
+        Make sure to check for the latest version of the library.
+        This is a UMD build which should create a global `chineseCalendarJs` object.
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/chinese-calendar-js@latest/dist/bundle.min.js"></script>
+
+    <script>
+        // Mappings for Pinyin (optional, for display)
+        const STEM_PINYIN = {
+            "甲": "Jia", "乙": "Yi", "丙": "Bing", "丁": "Ding", "戊": "Wu",
+            "己": "Ji", "庚": "Geng", "辛": "Xin", "壬": "Ren", "癸": "Gui"
+        };
+        const BRANCH_PINYIN = {
+            "子": "Zi", "丑": "Chou", "寅": "Yin", "卯": "Mao", "辰": "Chen", "巳": "Si",
+            "午": "Wu", "未": "Wei", "申": "Shen", "酉": "You", "戌": "Xu", "亥": "Hai"
+        };
+
+        function calculateBazi() {
+            const dateInput = document.getElementById('birthDate').value;
+            const timeInput = document.getElementById('birthTime').value;
+            const resultDiv = document.getElementById('result');
+            const errorDiv = document.getElementById('error-message');
+
+            resultDiv.innerHTML = ''; // Clear previous results
+            errorDiv.textContent = ''; // Clear previous errors
+
+            if (!dateInput || !timeInput) {
+                errorDiv.textContent = 'Please enter both birth date and time.';
+                return;
+            }
+
+            try {
+                const [year, month, day] = dateInput.split('-').map(Number);
+                const [hour, minute] = timeInput.split(':').map(Number);
+
+                // Create a JavaScript Date object.
+                // Note: JS Date month is 0-indexed (0 for Jan, 11 for Dec)
+                const birthDateTime = new Date(year, month - 1, day, hour, minute);
+
+                if (isNaN(birthDateTime.getTime())) {
+                    errorDiv.textContent = 'Invalid date or time entered.';
+                    return;
+                }
+                
+                // Check if the library is loaded
+                if (typeof chineseCalendarJs === 'undefined' || !chineseCalendarJs.solarTerm) {
+                    errorDiv.textContent = 'Error: Chinese calendar library not loaded correctly.';
+                    console.error('chineseCalendarJs or chineseCalendarJs.solarTerm is undefined.');
+                    return;
+                }
+
+                // The chinese-calendar-js library's solarTerm module has getBaZi
+                // It expects a JS Date object
+                const bazi = chineseCalendarJs.solarTerm.getBaZi(birthDateTime);
+                // bazi object structure:
+                // {
+                //   year: { stem: '癸', branch: '卯' },
+                //   month: { stem: '乙', branch: '丑' },
+                //   day: { stem: '乙', branch: '酉' },
+                //   hour: { stem: '丙', branch: '子' }
+                // }
+
+                if (!bazi || !bazi.year || !bazi.month || !bazi.day || !bazi.hour) {
+                     errorDiv.textContent = 'Could not calculate BaZi. The library might have issues with very old/future dates or an internal error.';
+                     console.error("BaZi calculation returned an unexpected result:", bazi);
+                     return;
+                }
+
+
+                resultDiv.innerHTML = `
+                    <h3>Your BaZi (Four Pillars):</h3>
+                    <p><span class="pillar-label">Date & Time:</span> ${birthDateTime.toLocaleString()}</p>
+                    <p><span class="pillar-label">Year Pillar:</span> ${bazi.year.stem}${bazi.year.branch} (${STEM_PINYIN[bazi.year.stem]} ${BRANCH_PINYIN[bazi.year.branch]})</p>
+                    <p><span class="pillar-label">Month Pillar:</span> ${bazi.month.stem}${bazi.month.branch} (${STEM_PINYIN[bazi.month.stem]} ${BRANCH_PINYIN[bazi.month.branch]})</p>
+                    <p><span class="pillar-label">Day Pillar:</span> ${bazi.day.stem}${bazi.day.branch} (${STEM_PINYIN[bazi.day.stem]} ${BRANCH_PINYIN[bazi.day.branch]})</p>
+                    <p><span class="pillar-label">Hour Pillar:</span> ${bazi.hour.stem}${bazi.hour.branch} (${STEM_PINYIN[bazi.hour.stem]} ${BRANCH_PINYIN[bazi.hour.branch]})</p>
+                    <br>
+                    <p><small>Note: Calculations are based on the standard local time of your browser/input. Traditional BaZi may consider Local Mean Time or True Solar Time, which can differ.</small></p>
+                `;
+
+            } catch (e) {
+                errorDiv.textContent = 'An error occurred during calculation: ' + e.message;
+                console.error("BaZi Calculation Error:", e);
+            }
+        }
+
+        // Set default date and time to something reasonable to avoid empty inputs initially
+        // or to guide the user.
+        // This is optional.
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const dd = String(today.getDate()).padStart(2, '0');
+            const hh = String(today.getHours()).padStart(2, '0');
+            const min = String(today.getMinutes()).padStart(2, '0');
+
+            if (document.getElementById('birthDate')) {
+                 document.getElementById('birthDate').value = `${yyyy-20}-${mm}-${dd}`; // Default to 20 years ago
+            }
+            if (document.getElementById('birthTime')) {
+                document.getElementById('birthTime').value = `${hh}:${min}`;
+            }
+        });
+
+    </script>
+</body>
+</html>
